@@ -1,9 +1,15 @@
 import React from 'react';
 
-function GuessResults({guess, setGuess}) {
-  return <div className='guess-results'>
-
-  </div>;
+function GuessResults({ guesses }) {
+  return (
+    <div className="guess-results">
+      {guesses.map(({value, id}) => (
+        <p key={id} className="guess">
+          {value}
+        </p>
+      ))} 
+    </div>
+  );
 }
 
 export default GuessResults;
