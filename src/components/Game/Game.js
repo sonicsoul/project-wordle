@@ -15,12 +15,14 @@ function Game() {
   const [guesses, setGuesses] = React.useState([])
   const [gameStatus, setGameStatus] = React.useState('running')
   const [answer, setAnswer] = React.useState(() => sample(WORDS))
-console.info({ answer });
+
+  console.info({ answer });
+
   function handleSubmitGuess(tentativeGuess){
     const nextGuesses = [...guesses, tentativeGuess]
     setGuesses(nextGuesses)
 
-    if (tentativeGuess == answer){
+    if (tentativeGuess === answer){
       setGameStatus('won')
     } else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED){
       setGameStatus('lost')
@@ -34,7 +36,8 @@ console.info({ answer });
     setGameStatus('running');
   }
 
-  const validatedGuesses = guesses.map((guess) => checkGuess(guess, answer))
+  const validatedGuesses = guesses.map((guess) => checkGuess(guess, answer));
+  console.log(validatedGuesses);
 
   return  (
     <> 

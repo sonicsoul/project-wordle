@@ -8,25 +8,20 @@ const ROWS = [
 
 function getStatusByLetter(validatedGuesses) {
   const statusObj = {};
-  // `.flat()` is a method that flattens nested arrays.
-  // Here it produces an array containing all of the letter/status
-  // objects for each guess.
+
+  // these are all the letters used in previously made guesses  
   const allLetters = validatedGuesses.flat();
-
+  
   allLetters.forEach(({ letter, status }) => {
-    const currentStatus = statusObj[letter];
-
+    const currentStatus = statusObj[letter];  
+    // If currentStatus is undefined, there was no status for that specific letter before. 
+    // so add a new key/value pair to the statusObj for that letter > {letter:letter , status:status} 
+    // then, return to the next letter
     if (currentStatus === undefined) {
       statusObj[letter] = status;
       return;
     }
-
-    // The same letter might have multiple matched statuses.
-    // For example, if the answer is "APPLE" and the user guesses
-    // "PAPER", then the letter "P" is misplaced (for the first P)
-    // and correct (for the second P).
-    //
-    // We want to prioritize the statuses in this order:
+  
     const STATUS_RANKS = {
       correct: 1,
       misplaced: 2,
@@ -40,13 +35,12 @@ function getStatusByLetter(validatedGuesses) {
       statusObj[letter] = status;
     }
   });
-
+  
   return statusObj;
 }
 
 const Keyboard = ({ validatedGuesses }) => {
   const statusByLetter = getStatusByLetter(validatedGuesses);
-
   return (
     <div className="keyboard">
       {ROWS.map((row, index) => (

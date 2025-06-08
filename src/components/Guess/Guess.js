@@ -3,7 +3,6 @@ import { range } from '../../utils';
 import Cell from '../Cell'
 
 function Guess({ value }) {
-
   return (
     <p className="guess">
       { range(5).map((num) => (
@@ -13,7 +12,7 @@ function Guess({ value }) {
           status={value ? value[num].status : undefined}
         />
         ))}
-  </p>
+    </p>
   )
 }
 
